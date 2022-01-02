@@ -1,0 +1,159 @@
+import turtle as t
+
+window1 = t.Screen()
+window1.title("PONG GAME SETTINGS")
+window1.bgcolor("pink")
+window1.setup(width= 700, height= 600)
+
+#Greetings
+pen = t.Turtle()
+pen.hideturtle()
+pen.speed(0)
+pen.goto(0,0)
+pen.write("Welcome to pong game."           
+          "You can customize your game settings with the following questions. "
+          "Have fun !", align="center", font=("Arial", 10, "bold"))
+
+#Creating players
+player1 = t.textinput("PLAYER1", "Enter your name: ")
+player2 = t.textinput("PLAYER2", "Enter your name: ")
+
+#Paddle colors
+leftpaddlecolor = t.textinput("LEFT PADDLE", "{}, choose the color of your paddle: ".format(player1))
+rightpaddlecolor = t.textinput("RIGHT PADDLE", "{}, choose the color of your paddle: ".format(player2))
+
+#Creating screen
+playerAscore = 0
+playerBscore = 0
+window = t.Screen()
+window.title("Pong Game")
+window.bgcolor(t.textinput("COLOR", "What background color would you like the game to use: "))
+window.setup(width=800, height=600)
+window.tracer(0)
+
+#Creating left paddle
+leftpaddle = t.Turtle()
+leftpaddle.speed(0)
+leftpaddle.shape("square")
+leftpaddle.color(leftpaddlecolor)
+leftpaddle.shapesize(stretch_wid=5, stretch_len=1)
+leftpaddle.penup()
+leftpaddle.goto(-350,0)
+
+#Creating right paddle
+rightpaddle = t.Turtle()
+rightpaddle.speed(0)
+rightpaddle.shape("square")
+rightpaddle.color(rightpaddlecolor)
+rightpaddle.shapesize(stretch_wid=5, stretch_len=1)
+rightpaddle.penup()
+rightpaddle.goto(350,0)
+
+#Creating Ball
+ball = t.Turtle()
+ball.speed(int(t.textinput("SPEED", "Choose the speed of the game(0 - 10): ")))
+ball.shape("circle")
+ball.color("red")
+ball.penup()
+ball.goto(5,5)
+ballxdirection = 0.2
+ballydirection = 0.2
+
+#Creating pen for scorecard update
+pen.clear()
+pen.speed(0)
+if window.bgcolor() == "black":
+    pen.color("white")
+else:
+    pen.color("black")
+pen.penup()
+pen.hideturtle()
+pen.goto(0,260)
+pen.write("SCORE", align="center", font=("Arial", 24, "normal"))
+
+#Move leftpaddle
+def leftpaddleup():
+    y = leftpaddle.ycor()
+    y = y + 90
+    leftpaddle.sety(y)
+
+
+def leftpaddledown():
+    y = leftpaddle.ycor()
+    y = y - 90
+    leftpaddle.sety(y)
+
+
+#Moving rightpaddle
+def rightpaddleup():
+    y = rightpaddle.ycor()
+    y = y + 90
+    rightpaddle.sety(y)
+
+def rightpaddledown():
+    y = rightpaddle.ycor()
+    y = y - 90
+    rightpaddle.sety(y)
+
+#Assign keys to paddle
+window.listen()
+window.onkeypress(leftpaddleup, "w")
+window.onkeypress(leftpaddledown, "s")
+window.onkeypress(rightpaddleup, "Up")
+window.onkeypress(rightpaddledown, "Down")
+
+#Moving ball
+while playerAscore < 5 and playerBscore < 5:
+    window.update()
+    ball.setx(ball.xcor() + ballxdirection)
+    ball.sety(ball.ycor() + ballydirection)
+
+    #setting borders(up)
+    if ball.ycor() > 290 :
+        ball.sety(290)
+        ballydirection = ballydirection * -1
+
+    #Setting borders(down)
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ballydirection = ballydirection * -1
+
+
+    #Setting borders(right)
+    if ball.xcor() > 390:
+        ball.goto(0,0)
+        ballxdirection = ballxdirection
+        playerAscore = playerAscore + 1
+        pen.clear()
+        pen.write("{}:{}  {}:{}".format(player1, playerAscore, player2, playerBscore, align="center", font=("Arial", 32, "normal")))
+
+
+    # Setting borders(left)
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ballxdirection = ballxdirection
+        playerBscore = playerBscore + 1
+        pen.clear()
+        pen.write("{}:{}  {}:{}".format(player1, playerAscore, player2, playerBscore, align="center", font=("Arial", 32, "normal")))
+
+
+    #Handling the collision
+    if (ball.xcor() >340) and (ball.xcor() <350) and (ball.ycor() < rightpaddle.ycor() + 40 and ball.ycor() > rightpaddle.ycor() - 40):
+        ball.setx(340)
+        ballxdirection = ballxdirection * - 1
+
+    if (ball.xcor() < -340) and (ball.xcor() > -350) and (ball.ycor() < leftpaddle.ycor() + 40 and ball.ycor() > leftpaddle.ycor() - 40):
+        ball.setx(-340)
+        ballxdirection = ballxdirection * - 1
+
+if playerAscore == 5:
+    pen.clear()
+    pen.goto(0,0)
+    pen.write("{} WON !".format(player1.title(), align="center", font=("Arial", 50, "normal")))
+
+if playerBscore == 5:
+    pen.clear()
+    pen.goto(0,0)
+    pen.write("{} WON !".format(player2.title(), align="center", font=("Arial", 50, "normal")))
+
+t.done()
