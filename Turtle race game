@@ -1,0 +1,480 @@
+#Turtle race game
+import random
+import time
+import turtle
+
+#Players
+num_players = int(turtle.textinput("NUMBER OF PLAYERS", "Choose the number of players for this round (2-5): "))
+
+if num_players == 2:
+    player1 = turtle.textinput("PLAYER 1", "Player 1, enter your name: ")
+    player1color = turtle.textinput("COLOR 1", "{}, what color do you want your turtle to be: ".format(player1.title()))
+    player2 = turtle.textinput("PLAYER 2", "Player 2, enter your name: ")
+    player2color = turtle.textinput("COLOR 2", "{}, what color do you want your turtle to be: ".format(player2.title()))
+    # player one
+    player_one = turtle.Turtle()
+    player_one.color(player1color)
+    player_one.shape("turtle")
+    # player two
+    player_two = player_one.clone()
+    player_two.color(player2color)
+    # player three
+    player_three = 0
+    # player four
+    player_four = 0
+    # player five
+    player_five = 0
+
+    # Setting up pen
+    pen = turtle.Turtle()
+    pen.color("black")
+    pen.hideturtle()
+
+    # Setting up screen
+    screen = turtle.Screen()
+    screen.bgcolor("light blue")
+
+    # names in front of turtles
+    pen.penup()
+    pen.goto(-355, 200)
+    pen.pendown()
+    pen.write(player1.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, 100)
+    pen.pendown()
+    pen.write(player2.title(), font=(15))
+
+    # position p1
+    player_one.penup()
+    player_one.goto(-300, 200)
+    # position p2
+    player_two.penup()
+    player_two.goto(-300, 100)
+
+    # finish line
+    player_one.goto(280, -280)
+    player_one.left(90)
+    player_one.pendown()
+    player_one.color("black")
+    player_one.forward(535)
+    player_one.write("FINISH", font=10)
+    player_one.penup()
+    player_one.color(player1color)
+    player_one.goto(-300, 200)
+    player_one.right(90)
+
+    # make sure pendown
+    player_one.pendown()
+    player_two.pendown()
+
+    # Values for dice
+    dice = [1, 2, 3, 4, 5, 6]
+
+    # Creating the game
+    for i in range(30):
+        if player_one.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player1color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player1.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_two.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player2color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player2.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        else:
+            dice_roll = random.choice(dice)
+            player_one.fd(20 * dice_roll)
+            dice_roll2 = random.choice(dice)
+            player_two.fd(20 * dice_roll2)
+            time.sleep(1)
+
+
+if num_players == 3:
+    player1 = turtle.textinput("PLAYER 1", "Player 1, enter your name: ")
+    player1color = turtle.textinput("COLOR 1", "{}, what color do you want your turtle to be: ".format(player1.title()))
+    player2 = turtle.textinput("PLAYER 2", "Player 2, enter your name: ")
+    player2color = turtle.textinput("COLOR 2", "{}, what color do you want your turtle to be: ".format(player2.title()))
+    player3 = turtle.textinput("PLAYER 3", "Player 3, enter your name: ")
+    player3color = turtle.textinput("COLOR 3", "{}, what color do you want your turtle to be: ".format(player3.title()))
+    # player one
+    player_one = turtle.Turtle()
+    player_one.color(player1color)
+    player_one.shape("turtle")
+    # player two
+    player_two = player_one.clone()
+    player_two.color(player2color)
+    # player three
+    player_three = turtle.Turtle()
+    player_three.shape("turtle")
+    player_three.color(player3color)
+    # player four
+    player_four = 0
+    # player five
+    player_five = 0
+
+    # Setting up pen
+    pen = turtle.Turtle()
+    pen.color("black")
+    pen.hideturtle()
+
+    # Setting up screen
+    screen = turtle.Screen()
+    screen.bgcolor("light blue")
+
+    # names in front of turtles
+    pen.penup()
+    pen.goto(-355, 200)
+    pen.pendown()
+    pen.write(player1.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, 100)
+    pen.pendown()
+    pen.write(player2.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, 0)
+    pen.pendown()
+    pen.write(player3.title(), font=(15))
+
+    # position p1
+    player_one.penup()
+    player_one.goto(-300, 200)
+    # position p2
+    player_two.penup()
+    player_two.goto(-300, 100)
+    # position p3
+    player_three.penup()
+    player_three.goto(-300, 0)
+
+    # finish line
+    player_one.goto(280, -280)
+    player_one.left(90)
+    player_one.pendown()
+    player_one.color("black")
+    player_one.forward(535)
+    player_one.write("FINISH", font=10)
+    player_one.penup()
+    player_one.color(player1color)
+    player_one.goto(-300, 200)
+    player_one.right(90)
+
+    # make sure pendown
+    player_one.pendown()
+    player_two.pendown()
+    player_three.pendown()
+
+    # Values for dice
+    dice = [1, 2, 3, 4, 5, 6]
+
+    # Creating the game
+    for i in range(30):
+        if player_one.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player1color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player1.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_two.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player2color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player2.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_three.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player3color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player3.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        else:
+            dice_roll = random.choice(dice)
+            player_one.fd(20 * dice_roll)
+            dice_roll2 = random.choice(dice)
+            player_two.fd(20 * dice_roll2)
+            dice_roll3 = random.choice(dice)
+            player_three.fd(20 * dice_roll3)
+            time.sleep(1)
+
+
+if num_players == 4:
+    player1 = turtle.textinput("PLAYER 1", "Player 1, enter your name: ")
+    player1color = turtle.textinput("COLOR 1", "{}, what color do you want your turtle to be: ".format(player1.title()))
+    player2 = turtle.textinput("PLAYER 2", "Player 2, enter your name: ")
+    player2color = turtle.textinput("COLOR 2", "{}, what color do you want your turtle to be: ".format(player2.title()))
+    player3 = turtle.textinput("PLAYER 3", "Player 3, enter your name: ")
+    player3color = turtle.textinput("COLOR 3", "{}, what color do you want your turtle to be: ".format(player3.title()))
+    player4 = turtle.textinput("PLAYER 4", "Player 4, enter your name: ")
+    player4color = turtle.textinput("COLOR 4", "{}, what color do you want your turtle to be: ".format(player4.title()))
+    # player one
+    player_one = turtle.Turtle()
+    player_one.color(player1color)
+    player_one.shape("turtle")
+    # player two
+    player_two = player_one.clone()
+    player_two.color(player2color)
+    # player three
+    player_three = turtle.Turtle()
+    player_three.shape("turtle")
+    player_three.color(player3color)
+    # player four
+    player_four = turtle.Turtle()
+    player_four.shape("turtle")
+    player_four.color(player4color)
+    # player five
+    player_five = 0
+
+    # Setting up pen
+    pen = turtle.Turtle()
+    pen.color("black")
+    pen.hideturtle()
+
+    # Setting up screen
+    screen = turtle.Screen()
+    screen.bgcolor("light blue")
+
+    # names in front of turtles
+    pen.penup()
+    pen.goto(-355, 200)
+    pen.pendown()
+    pen.write(player1.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, 100)
+    pen.pendown()
+    pen.write(player2.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, 0)
+    pen.pendown()
+    pen.write(player3.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, -100)
+    pen.pendown()
+    pen.write(player4.title(), font=(15))
+
+    # position p1
+    player_one.penup()
+    player_one.goto(-300, 200)
+    # position p2
+    player_two.penup()
+    player_two.goto(-300, 100)
+    # position p3
+    player_three.penup()
+    player_three.goto(-300, 0)
+    # position p4
+    player_four.penup()
+    player_four.goto(-300, -100)
+
+    # finish line
+    player_one.goto(280, -280)
+    player_one.left(90)
+    player_one.pendown()
+    player_one.color("black")
+    player_one.forward(535)
+    player_one.write("FINISH", font=10)
+    player_one.penup()
+    player_one.color(player1color)
+    player_one.goto(-300, 200)
+    player_one.right(90)
+
+    # make sure pendown
+    player_one.pendown()
+    player_two.pendown()
+    player_three.pendown()
+    player_four.pendown()
+
+    # Values for dice
+    dice = [1, 2, 3, 4, 5, 6]
+
+    # Creating the game
+    for i in range(30):
+        if player_one.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player1color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player1.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_two.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player2color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player2.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_three.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player3color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player3.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_four.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor("yellow")
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player4.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        else:
+            dice_roll = random.choice(dice)
+            player_one.fd(20 * dice_roll)
+            dice_roll2 = random.choice(dice)
+            player_two.fd(20 * dice_roll2)
+            dice_roll3 = random.choice(dice)
+            player_three.fd(20 * dice_roll3)
+            dice_roll4 = random.choice(dice)
+            player_four.fd(20 * dice_roll4)
+            time.sleep(1)
+
+
+if num_players == 5:
+    player1 = turtle.textinput("PLAYER 1", "Player 1, enter your name: ")
+    player1color = turtle.textinput("COLOR 1", "{}, what color do you want your turtle to be: ".format(player1.title()))
+    player2 = turtle.textinput("PLAYER 2", "Player 2, enter your name: ")
+    player2color = turtle.textinput("COLOR 2", "{}, what color do you want your turtle to be: ".format(player2.title()))
+    player3 = turtle.textinput("PLAYER 3", "Player 3, enter your name: ")
+    player3color = turtle.textinput("COLOR 3", "{}, what color do you want your turtle to be: ".format(player3.title()))
+    player4 = turtle.textinput("PLAYER 4", "Player 4, enter your name: ")
+    player4color = turtle.textinput("COLOR 4", "{}, what color do you want your turtle to be: ".format(player4.title()))
+    player5 = turtle.textinput("PLAYER 5", "Player 5, enter your name: ")
+    player5color = turtle.textinput("COLOR 5", "{}, what color do you want your turtle to be: ".format(player5.title()))
+    # player one
+    player_one = turtle.Turtle()
+    player_one.color(player1color)
+    player_one.shape("turtle")
+    # player two
+    player_two = player_one.clone()
+    player_two.color(player2color)
+    # player three
+    player_three = turtle.Turtle()
+    player_three.shape("turtle")
+    player_three.color(player3color)
+    # player four
+    player_four = turtle.Turtle()
+    player_four.shape("turtle")
+    player_four.color(player4color)
+    # player five
+    player_five = turtle.Turtle()
+    player_five.shape("turtle")
+    player_five.color(player5color)
+
+    # Setting up pen
+    pen = turtle.Turtle()
+    pen.color("black")
+    pen.hideturtle()
+
+    # Setting up screen
+    screen = turtle.Screen()
+    screen.bgcolor("light blue")
+
+    # names in front of turtles
+    pen.penup()
+    pen.goto(-355, 200)
+    pen.pendown()
+    pen.write(player1.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, 100)
+    pen.pendown()
+    pen.write(player2.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, 0)
+    pen.pendown()
+    pen.write(player3.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, -100)
+    pen.pendown()
+    pen.write(player4.title(), font=(15))
+    pen.penup()
+    pen.goto(-355, -200)
+    pen.pendown()
+    pen.write(player5.title(), font=(15))
+
+    # position p1
+    player_one.penup()
+    player_one.goto(-300, 200)
+    # position p2
+    player_two.penup()
+    player_two.goto(-300, 100)
+    # position p3
+    player_three.penup()
+    player_three.goto(-300, 0)
+    # position p4
+    player_four.penup()
+    player_four.goto(-300, -100)
+    # position p5
+    player_five.penup()
+    player_five.goto(-300, -200)
+
+    # finish line
+    player_one.goto(280, -280)
+    player_one.left(90)
+    player_one.pendown()
+    player_one.color("black")
+    player_one.forward(535)
+    player_one.write("FINISH", font=10)
+    player_one.penup()
+    player_one.color(player1color)
+    player_one.goto(-300, 200)
+    player_one.right(90)
+
+    # make sure pendown
+    player_one.pendown()
+    player_two.pendown()
+    player_three.pendown()
+    player_four.pendown()
+    player_five.pendown()
+
+    # Values for dice
+    dice = [1, 2, 3, 4, 5, 6]
+
+    # Creating the game
+    for i in range(30):
+        if player_one.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player1color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player1.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_two.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player2color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player2.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_three.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor(player3color)
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player3.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        elif player_four.pos() >= (280, -250):
+            screen.clear()
+            screen.bgcolor("yellow")
+            pen.goto(0, 0)
+            pen.write("Great job {}. You won the race !!!".format(player4.title()), align="center",
+                      font=("Arial", 25, "bold"))
+            break
+        else:
+            dice_roll = random.choice(dice)
+            player_one.fd(20 * dice_roll)
+            dice_roll2 = random.choice(dice)
+            player_two.fd(20 * dice_roll2)
+            dice_roll3 = random.choice(dice)
+            player_three.fd(20 * dice_roll3)
+            dice_roll4 = random.choice(dice)
+            player_four.fd(20 * dice_roll4)
+            dice_roll5 = random.choice(dice)
+            player_five.fd(20 * dice_roll5)
+            time.sleep(1)
+
+            
+turtle.done()
